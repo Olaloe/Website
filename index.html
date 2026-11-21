@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olaloe — Community, Well-being & Nature</title>
+  <meta name="description" content="Olaloe is a young informal organisation from Alicante, Spain. We promote self-care, community building, and connection with nature through Erasmus+ projects.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark: #27500A;
+      --green-mid: #3B6D11;
+      --green-light: #639922;
+      --green-pale: #C0DD97;
+      --green-bg: #EAF3DE;
+      --teal-bg: #E1F5EE;
+      --cream: #F7F4EF;
+      --white: #ffffff;
+      --gray-text: #555;
+      --radius: 12px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      color: #2a2a2a;
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #e8e8e8;
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      height: 36px;
+      width: auto;
+      object-fit: contain;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray-text);
+      font-size: 15px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--green-mid); }
+    .nav-cta {
+      background: var(--green-mid);
+      color: white;
+      border: none;
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--green-dark); }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/hero-alicante.jpg');
+      background-size: cover;
+      background-position: center 40%;
+      filter: brightness(0.45);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 80px 8%;
+      max-width: 680px;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(192,221,151,0.25);
+      border: 1px solid var(--green-pale);
+      color: var(--green-pale);
+      font-size: 13px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      letter-spacing: 0.03em;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 600;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--green-pale); }
+    .hero p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.82);
+      max-width: 500px;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--green-mid);
+      color: white;
+      border: none;
+      padding: 13px 26px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--green-dark); }
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 1.5px solid rgba(255,255,255,0.6);
+      padding: 13px 26px;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+    .hero-badges {
+      position: absolute;
+      bottom: 36px;
+      left: 8%;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      z-index: 2;
+    }
+    .badge {
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* SECTIONS */
+    section { padding: 80px 8%; }
+    .section-label {
+      font-size: 12px;
+      color: var(--green-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 600;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      color: var(--green-dark);
+    }
+    .section-intro {
+      font-size: 17px;
+      color: var(--gray-text);
+      max-width: 600px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    /* APPROACH CARDS */
+    .approach { background: var(--cream); }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border: 1px solid #e8e8e8;
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--green-bg);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+    .card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--green-dark);
+      margin-bottom: 8px;
+    }
+    .card p {
+      font-size: 14px;
+      color: var(--gray-text);
+      line-height: 1.6;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .about-text p {
+      font-size: 16px;
+      color: var(--gray-text);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .profiles {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .profile-card {
+      background: white;
+      border: 1px solid #e8e8e8;
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      align-items: stretch;
+    }
+    .profile-photo {
+      width: 100px;
+      flex-shrink: 0;
+      object-fit: cover;
+    }
+    .profile-info {
+      padding: 16px 18px;
+    }
+    .profile-info strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--green-dark);
+      margin-bottom: 4px;
+    }
+    .profile-role {
+      font-size: 12px;
+      color: var(--green-light);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .profile-info p {
+      font-size: 13px;
+      color: var(--gray-text);
+      line-height: 1.55;
+    }
+    .team-photo {
+      margin-top: 24px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .team-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* PROJECTS */
+    .projects { background: var(--green-bg); }
+    .projects-intro-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+      align-items: end;
+    }
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .gallery-item {
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-item.tall {
+      grid-row: span 2;
+      aspect-ratio: auto;
+    }
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.6));
+      color: white;
+      font-size: 12px;
+      padding: 20px 10px 10px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .gallery-item:hover .gallery-caption { opacity: 1; }
+
+    /* STATS */
+    .stats { background: var(--green-dark); }
+    .stats h2 { color: white; }
+    .stats .section-label { color: var(--green-pale); }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 24px;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--green-pale);
+      display: block;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .contact-box {
+      background: var(--green-bg);
+      border: 1px solid var(--green-pale);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+    .contact-box h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--green-dark);
+      margin-bottom: 20px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--green-mid);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .contact-item-text strong {
+      display: block;
+      font-size: 13px;
+      color: var(--green-mid);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+    }
+    .contact-item-text a, .contact-item-text span {
+      font-size: 15px;
+      color: var(--green-dark);
+      text-decoration: none;
+    }
+    .contact-item-text a:hover { text-decoration: underline; }
+    .erasmus-box {
+      background: white;
+      border: 1px solid #e8e8e8;
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-top: 20px;
+    }
+    .erasmus-box h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--green-dark);
+      margin-bottom: 10px;
+    }
+    .oid-pill {
+      display: inline-block;
+      background: var(--green-bg);
+      border: 1px solid var(--green-pale);
+      color: var(--green-dark);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 20px;
+    }
+    .contact-photo {
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .contact-photo img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+    .contact-photo-caption {
+      background: var(--green-dark);
+      color: rgba(255,255,255,0.8);
+      font-size: 13px;
+      padding: 12px 16px;
+      text-align: center;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #1a2e08;
+      padding: 40px 8%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .footer-logo img { height: 32px; filter: brightness(0) invert(1) opacity(0.8); }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+    .footer-links a {
+      text-decoration: none;
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.9); }
+    .footer-copy {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      section { padding: 56px 6%; }
+      .about-grid, .contact-grid, .projects-intro-row { grid-template-columns: 1fr; gap: 32px; }
+      .photo-gallery { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item.tall { grid-row: span 1; aspect-ratio: 1; }
+      nav { padding: 0 4%; }
+      .nav-links { display: none; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="images/logo.jpeg" alt="Olaloe logo">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#approach">What we do</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Partner with us</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Alicante, Spain · Erasmus+ organisation</span>
+    <h1>Community, <span>well-being</span><br>and connection<br>with nature</h1>
+    <p>We are Irene and Sara — building inclusive spaces where people grow, take care of themselves, and explore more sustainable ways of living together.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Get in touch</a>
+      <a href="#projects" class="btn-outline">Our projects</a>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge">🌿 Nature connection</span>
+    <span class="badge">💛 Mental well-being</span>
+    <span class="badge">🤝 Non-formal education</span>
+    <span class="badge">🌍 Erasmus+</span>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="approach" id="approach">
+  <div class="section-label">What we do</div>
+  <h2>Our approach</h2>
+  <p class="section-intro">We combine somatic practices, mindfulness, games, and guided group reflections to build community and encourage people to take an active role in their social environment.</p>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">💚</div>
+      <h3>Self-care & well-being</h3>
+      <p>Supporting self-awareness and emotional health through body-based and somatic practices, mindfulness, and guided reflections.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤝</div>
+      <h3>Community building</h3>
+      <p>Creating safe, inclusive spaces where people feel a sense of belonging and connection — to each other and to their social environment.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌱</div>
+      <h3>Nature & sustainability</h3>
+      <p>Fostering a respectful and caring relationship with the natural world, promoting sustainable attitudes through empathy rather than guilt.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌍</div>
+      <h3>International cooperation</h3>
+      <p>Building lasting networks of partnership through Erasmus+ and European Solidarity Corps to co-create initiatives across Europe.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Who we are</div>
+  <h2>Meet Olaloe</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Olaloe is a newly established organisation founded in December 2025 by Irene and Sara. It was created with great enthusiasm and a strong commitment to sharing practices through experience-based learning.</p>
+      <p>After several years of involvement in Erasmus+ projects, we decided to take the next step and create our own space, building on what we learned about non-formal education, participatory methods, and community building in international environments.</p>
+      <p>We stay curious and open to improving ourselves, because we don't claim to know everything — but we are willing to learn. We aim to create safe, inclusive spaces where people can grow, take responsibility, and explore more sustainable ways of living together.</p>
+      <div class="team-photo">
+        <img src="images/about-team.jpg" alt="Irene and Sara during a European project">
+      </div>
+    </div>
+    <div class="profiles">
+      <div class="profile-card">
+        <img class="profile-photo" src="images/irene-portrait.jpg" alt="Irene Hortal Gil">
+        <div class="profile-info">
+          <strong>Irene Hortal Gil</strong>
+          <div class="profile-role">Project Manager · Legal Representative</div>
+          <p>Clinical psychologist with experience in mental health promotion and group facilitation. Since 2018 she has worked with young people, leading workshops on emotional wellbeing, body awareness, and self-care, integrating somatic and nature-based practices.</p>
+        </div>
+      </div>
+      <div class="profile-card">
+        <img class="profile-photo" src="images/sara-portrait.jpg" alt="Sara Ghivarello">
+        <div class="profile-info">
+          <strong>Sara Ghivarello</strong>
+          <div class="profile-role">Project Manager · Contact Person</div>
+          <p>Involved in youth work since 2017. Experience in community engagement through volunteering with Red Cross Youth and co-creating a local social space, facilitating activities focused on dialogue, sports, and environmental awareness.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS GALLERY -->
+<section class="projects" id="projects">
+  <div class="projects-intro-row">
+    <div>
+      <div class="section-label">Our experience</div>
+      <h2>Projects & participants</h2>
+    </div>
+    <p class="section-intro" style="margin-bottom:0;">Between the two of us, we have participated in 15+ projects in youth mobilities, training courses, and European Solidarity Corps — on topics including sport, active citizenship, social inclusion, ecology, and mental health.</p>
+  </div>
+
+  <div class="photo-gallery">
+    <div class="gallery-item tall">
+      <img src="images/project-build2.jpg" alt="Irene and Sara during a European Solidarity Corps project">
+      <div class="gallery-caption">European Solidarity Corps — outdoor construction</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/project-somatic.jpg" alt="Somatic workshop with participants">
+      <div class="gallery-caption">Somatic practices workshop</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/project-circle.jpg" alt="Group circle discussion">
+      <div class="gallery-caption">Group reflection circle</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/project-acrobatics.jpg" alt="Group acrobatics activity">
+      <div class="gallery-caption">Body movement & acrobatics</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/project-contact.jpg" alt="Contact improvisation activity">
+      <div class="gallery-caption">Contact improvisation session</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/project-build1.jpg" alt="Group building during European Solidarity Corps">
+      <div class="gallery-caption">Community building — Greece</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/project-nature.jpg" alt="Person floating in natural pool — connection with nature">
+      <div class="gallery-caption">Connection with nature</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/project-movement1.jpg" alt="Movement activity during a youth exchange">
+      <div class="gallery-caption">Youth exchange — movement workshop</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/project-build3.jpg" alt="Group working together on a construction project">
+      <div class="gallery-caption">ESC — collective construction</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="section-label">In numbers</div>
+  <h2>Our journey so far</h2>
+  <br>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span class="stat-number">15+</span>
+      <span class="stat-label">Erasmus+ projects as participants</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">2017</span>
+      <span class="stat-label">Year our youth work journey began</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">5+</span>
+      <span class="stat-label">Topics covered (health, ecology, inclusion…)</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">2025</span>
+      <span class="stat-label">Year Olaloe was founded</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get in touch</div>
+  <h2>Let's work together</h2>
+  <p class="section-intro">We're looking for partners for Erasmus+ and European Solidarity Corps projects. Feel free to reach out — we'd love to collaborate!</p>
+  <div class="contact-grid">
+    <div>
+      <div class="contact-box">
+        <h3>Contact us</h3>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div class="contact-item-text">
+            <strong>General email</strong>
+            <a href="mailto:olaloe25@gmail.com">olaloe25@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">👩</div>
+          <div class="contact-item-text">
+            <strong>Irene Hortal (legal rep.)</strong>
+            <a href="mailto:irenehorgil9@gmail.com">irenehorgil9@gmail.com</a><br>
+            <span>+34 661 743 364</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">👩</div>
+          <div class="contact-item-text">
+            <strong>Sara Ghivarello (contact person)</strong>
+            <a href="mailto:saraghivarello@gmail.com">saraghivarello@gmail.com</a><br>
+            <span>+34 722 325 424</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-item-text">
+            <strong>Address</strong>
+            <span>C/Fluorita N20, 03110 Alicante, Spain</span>
+          </div>
+        </div>
+      </div>
+      <div class="erasmus-box">
+        <h4>Registered Erasmus+ organisation</h4>
+        <p style="font-size:13px; color:#666; margin-bottom:12px;">We are an officially registered informal group of young people, eligible to apply and partner in Erasmus+ and European Solidarity Corps projects.</p>
+        <span class="oid-pill">OID: E10413570</span>
+      </div>
+    </div>
+    <div class="contact-photo">
+      <img src="images/alicante-street.jpg" alt="Alicante old town — where Olaloe is based">
+      <div class="contact-photo-caption">Barrio de Santa Cruz, Alicante — where Olaloe is based</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="images/logo.jpeg" alt="Olaloe">
+  </div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#approach">What we do</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <span class="footer-copy">© 2025 Olaloe · Alicante, Spain</span>
+</footer>
+
+</body>
+</html>
